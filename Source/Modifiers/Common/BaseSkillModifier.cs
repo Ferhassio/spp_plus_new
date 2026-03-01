@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BepInEx.Configuration;
 using EntityStates;
 using RoR2;
@@ -12,6 +13,16 @@ namespace SkillsPlusPlus.Modifiers
 
         /// <inheritdoc/>
         internal Type[] EntityStateTypes { get; set; }
+
+        /// <summary>
+        /// The list of entity state type names for lazy loading.
+        /// </summary>
+        internal string[] EntityStateTypeNames { get; set; }
+
+        /// <summary>
+        /// Whether the entity state types have been resolved from type names.
+        /// </summary>
+        internal bool typesResolved = false;
 
         /// <summary>
         /// The list of skillnames associated with this modifier.
@@ -35,6 +46,7 @@ namespace SkillsPlusPlus.Modifiers
         {
             this.skillNames = new string[0];
             this.EntityStateTypes = new Type[0];
+            this.EntityStateTypeNames = new string[0];
         }
 
         public BaseSkillModifier(string[] skillNames, Type[] entityStateTypes)
@@ -174,6 +186,48 @@ namespace SkillsPlusPlus.Modifiers
         // public static int MultScaling(int baseValue, float multiplier, int level) {
         //     return (int)MultScaling((float)baseValue, multiplier, level);            
         // }
+
+        /// <summary>
+        /// Resolves entity state types from type names if they haven't been resolved yet.
+        /// </summary>
+        internal void ResolveEntityStateTypes()
+        {
+            if (EntityStateTypeNames == null || EntityStateTypeNames.Length == 0)
+            {
+                return;
+            }
+
+            Logger.Warn("Resolving entity state types for modifier {0}", this.GetType().FullName);
+            List<Type> resolvedTypes = new List<Type>();
+            
+            if (EntityStateTypes != null)
+            {
+                resolvedTypes.AddRange(EntityStateTypes);
+            }
+
+            bool allTypesResolved = true;
+            foreach (string typeName in EntityStateTypeNames)
+            {
+                Type type = SkillModifierManager.ResolveType(typeName);
+                if (type != null)
+                {
+                    if (!resolvedTypes.Contains(type))
+                    {
+                        resolvedTypes.Add(type);
+                        Logger.Warn("Resolved type {0} for modifier {1}", typeName, this.GetType().FullName);
+                        SkillModifierManager.RegisterTypeToModifier(type, this);
+                    }
+                }
+                else
+                {
+                    Logger.Warn("Could not resolve type {0} for modifier {1}", typeName, this.GetType().FullName);
+                    allTypesResolved = false;
+                }
+            }
+
+            EntityStateTypes = resolvedTypes.ToArray();
+            typesResolved = allTypesResolved;
+        }
 
         /// <summary>
         /// A helper method that find the SkillUpgrade of a Skill by name.

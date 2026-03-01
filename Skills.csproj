@@ -39,13 +39,16 @@
     <Compile Remove="libs\**" />
     <Compile Remove="PublicAPITest\**" />
     <Compile Remove="Tests\**" />
+    <Compile Remove="MOD_TEMP_DATA\**" />
     <EmbeddedResource Remove="Images\**" />
     <EmbeddedResource Remove="libs\**" />
     <EmbeddedResource Remove="Tests\**" />
+    <EmbeddedResource Remove="MOD_TEMP_DATA\**" />
     <None Remove="Images\**" />
     <None Remove="libs\**" />
     <None Remove="PublicAPITest\**" />
     <None Remove="Tests\**" />
+    <None Remove="MOD_TEMP_DATA\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.8">

@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# TEMP mod data
+MOD_TEMP_DATA/
+
 # User-specific files
 *.suo
 *.user
