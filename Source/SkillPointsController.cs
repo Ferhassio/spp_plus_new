@@ -72,6 +72,10 @@ namespace SkillsPlusPlus
             {
                 On.RoR2.CharacterBody.RecalculateStats += this.OnRecalculateStats;
             }
+            else
+            {
+                On.RoR2.CharacterBody.RecalculateStats += this.OnRecalculateStatsClient;
+            }
         }
 
         private void OnDisable()
@@ -79,7 +83,14 @@ namespace SkillsPlusPlus
             this.playerCharacterMasterController.master.onBodyStart -= this.OnBodyStart;
             On.RoR2.CharacterMaster.GetDeployableSameSlotLimit -= this.GetDeployableSameSlotLimit;
             On.EntityStates.GenericCharacterMain.CanExecuteSkill -= this.GenericCharacterMain_CanExecuteSkill;
-            On.RoR2.CharacterBody.RecalculateStats -= this.OnRecalculateStats;
+            if (NetworkServer.active)
+            {
+                On.RoR2.CharacterBody.RecalculateStats -= this.OnRecalculateStats;
+            }
+            else
+            {
+                On.RoR2.CharacterBody.RecalculateStats -= this.OnRecalculateStatsClient;
+            }
         }
 
         [Server]
@@ -174,6 +185,16 @@ namespace SkillsPlusPlus
 
         #endregion
 
+        [Client]
+        private void OnRecalculateStatsClient(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        {
+            orig(self);
+            if (self == this.body)
+            {
+                CmdSyncLevelChanged((int)self.level);
+            }
+        }
+
         private void Update()
         {
 #if DEBUG
@@ -252,6 +273,15 @@ namespace SkillsPlusPlus
             Logger.Debug("Giving points");
             this.earnedSkillPoints++;
             this.unspentSkillPoints++;
+        }
+
+        [Command]
+        [Server]
+        private void CmdSyncLevelChanged(int clientLevel)
+        {
+            int characterLevel = (int)TeamManager.instance.GetTeamLevel(this.PlayerTeamIndex);
+            Logger.Debug("CmdSyncLevelChanged - Client level: {0}, Server level: {1}", clientLevel, characterLevel);
+            OnLevelChanged();
         }
 
         private int SkillPointsAtLevel(int characterLevel)
