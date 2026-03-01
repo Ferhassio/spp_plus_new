@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Skills</AssemblyName>
+    <RootNamespace>SkillsPlusPlus</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>Current</OldToolsVersion>
+    <ProjectGuid>{A41E554F-A2B3-451F-90DA-09878F5D70F8}</ProjectGuid>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>CWMlolzlz</Authors>
+    <Product />
+    <Company />
+    <PackageProjectUrl>https://thunderstore.io/package/CWMlolzlz/SkillsPlusPlus/</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/cwmlolzlz/ror2skillsplusplus</RepositoryUrl>
+    <PackageId>Skills++</PackageId>
+    <Configurations>Debug;Release;Mulitplayer</Configurations>
+    <UserSecretsId>48d99726-acb4-4111-bdd7-282d6d2b6048</UserSecretsId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile></DocumentationFile>
+    <NoWarn>1701;1702;IDE0051</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>1701;1702;IDE0051</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mulitplayer|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>1701;1702;IDE0051</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="libs\**" />
+    <Compile Remove="PublicAPITest\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="libs\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Images\**" />
+    <None Remove="libs\**" />
+    <None Remove="PublicAPITest\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="R2API" Version="5.0.5" />
+    <PackageReference Include="R2API.Core" Version="5.3.0" />
+    <PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.3" />
+    <PackageReference Include="UnityEngine.Modules" Version="6000.3.1" IncludeAssets="compile" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\SkillsPlusPlus.language">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ExtraSkillSlots">
+      <HintPath>libs\KingEnderBrine-ExtraSkillSlots-1.6.2\plugins\ExtraSkillSlots\ExtraSkillSlots.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebindables">
+      <HintPath>libs\Rebindables.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityHotReload">
+      <HintPath>libs\UnityHotReload.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!--Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="IF &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;del /Q &quot;$(TargetDir)$(TargetName).zip&quot;&#xD;&#xA;)" />
+  </Target-->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cp &quot;$(TargetDir)$(TargetFileName)&quot; &quot;$(ProjectDir)NetworkWeaver&quot;&#xA;cp &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(ProjectDir)NetworkWeaver&quot;&#xA;&#xA;cd &quot;$(ProjectDir)NetworkWeaver&quot;&#xA;&#xA;wine Unity.UNetWeaver.exe &quot;../libs/UnityEngine.CoreModule.dll&quot; &quot;../libs/com.unity.multiplayer-hlapi.Runtime.dll&quot; &quot;Patched/&quot;  $(TargetFileName) &quot;$(ProjectDir)/libs&quot;&#xA;&#xA;mv &quot;$(TargetFileName)&quot; &quot;$(TargetFileName).prepatch&quot;&#xA;mv &quot;$(TargetName).pdb&quot; &quot;$(TargetName).pdb.prepatch&quot;&#xA;&#xA;cd ./Patched&#xA;&#xA;cp -r $(ProjectDir)NetworkWeaver/Patched $(TargetDir)Robocopy&#xA;&#xA;rm -rf $(ProjectDir)NetworkWeaver/Patched&#xA;&#xA;cp /run/media/icebrah/buh/github/ror2skillsplusplushgithub/bin/Debug/netstandard2.1/Skills.dll &quot;/run/media/icebrah/buh/gale/riskofrain2/profiles/debug2 awese/BepInEx/plugins/icebro-SkillsPlusPlus/Skills.dll&quot;&#xA;&#xA;cp /run/media/icebrah/buh/github/ror2skillsplusplushgithub/bin/Debug/netstandard2.1/Skills.pdb &quot;/run/media/icebrah/buh/gale/riskofrain2/profiles/debug2 awese/BepInEx/plugins/icebro-SkillsPlusPlus/Skills.pdb&quot;" />
+  </Target>
+</Project>
