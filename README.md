@@ -7,6 +7,8 @@ This fork of [ModSkills++](https://github.com/gamrtiem/ror2skillsplusplus) by [g
 [Original author's changelog history](https://github.com/gamrtiem/ror2skillsplusplus/blob/main/CHANGELOG.md)
 
 ## What's new in this fork:
+v0.6.6:
+- Added compability (not balance) for Starstorm2 character: Chirr
 
 v0.6.5:
 - Added compatibility with Alloyed Collective dlc.
