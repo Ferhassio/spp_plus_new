@@ -1,3 +1,4 @@
 {
-    "csharpfixformat.style.spaces.beforeParenthesis": false
+    "csharpfixformat.style.spaces.beforeParenthesis": false,
+    "search.useIgnoreFiles": false
 }
