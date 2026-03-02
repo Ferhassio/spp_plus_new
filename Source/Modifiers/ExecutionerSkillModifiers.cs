@@ -39,6 +39,7 @@ namespace SkillsPlusPlus.Modifiers
     {
         private float originalBaseDuration = 0;
         private float originalDamageCoefficient = 0;
+        private int originalBaseBouncesRemaining = 0;
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
@@ -50,14 +51,18 @@ namespace SkillsPlusPlus.Modifiers
                     originalBaseDuration = GetStaticFloat(fireTaserType, "baseDuration");
                 if (Mathf.Abs(originalDamageCoefficient) < 0.01f) 
                     originalDamageCoefficient = GetStaticFloat(fireTaserType, "damageCoefficient");
+                if (originalBaseBouncesRemaining == 0)
+                    originalBaseBouncesRemaining = GetStaticInt(fireTaserType, "baseBouncesRemaining");
 
                 float newDuration = MultScaling(originalBaseDuration, -0.15f, level);
                 float newDamage = MultScaling(originalDamageCoefficient, 0.20f, level);
+                int newBouncesRemaining = originalBaseBouncesRemaining + level;
                 
                 SetStaticFloat(fireTaserType, "baseDuration", newDuration);
                 SetStaticFloat(fireTaserType, "damageCoefficient", newDamage);
+                SetStaticInt(fireTaserType, "baseBouncesRemaining", newBouncesRemaining);
                 
-                Logger.Warn($"ExecutionerFireTaserSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}");
+                Logger.Warn($"ExecutionerFireTaserSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Bounces: {originalBaseBouncesRemaining} -> {newBouncesRemaining}");
             }
         }
     }
@@ -178,6 +183,7 @@ namespace SkillsPlusPlus.Modifiers
     {
         private float originalBaseDuration = 0;
         private float originalDamageCoefficient = 0;
+        private float originalSelfKnockbackForce = 0;
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
@@ -189,14 +195,18 @@ namespace SkillsPlusPlus.Modifiers
                     originalBaseDuration = GetStaticFloat(fireChargeGunType, "baseDuration");
                 if (Mathf.Abs(originalDamageCoefficient) < 0.01f) 
                     originalDamageCoefficient = GetStaticFloat(fireChargeGunType, "damageCoefficient");
+                if (Mathf.Abs(originalSelfKnockbackForce) < 0.01f) 
+                    originalSelfKnockbackForce = GetStaticFloat(fireChargeGunType, "selfKnockbackForce");
 
-                float newDuration = MultScaling(originalBaseDuration, -0.10f, level);
-                float newDamage = MultScaling(originalDamageCoefficient, 0.25f, level);
+                float newDuration = MultScaling(originalBaseDuration, -0.15f, level);
+                float newDamage = MultScaling(originalDamageCoefficient, 0.30f, level);
+                float newKnockbackForce = MultScaling(originalSelfKnockbackForce, -0.10f, level);
                 
                 SetStaticFloat(fireChargeGunType, "baseDuration", newDuration);
                 SetStaticFloat(fireChargeGunType, "damageCoefficient", newDamage);
+                SetStaticFloat(fireChargeGunType, "selfKnockbackForce", newKnockbackForce);
                 
-                Logger.Warn($"ExecutionerFireIonGunSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}");
+                Logger.Warn($"ExecutionerFireIonGunSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Knockback Force: {originalSelfKnockbackForce} -> {newKnockbackForce}");
             }
         }
     }
@@ -204,12 +214,13 @@ namespace SkillsPlusPlus.Modifiers
     [SkillLevelModifier("sdExe2Slam", "EntityStates.Executioner2.ExecuteLeap", "EntityStates.Executioner2.ExecuteSlam", "EntityStates.Executioner2.ExecuteImpact")]
     internal class ExecutionerExecuteSkillModifier : ReflectedSkillModifier
     {
-        private float originalLeapDamageCoefficient = 0;
-        private float originalLeapBlastRadius = 0;
-        private float originalSlamDamageCoefficient = 0;
+        private float originalLeapBaseDuration = 0;
+        private float originalLeapVerticalSpeed = 0;
+        private float originalSlamBaseDamageCoefficient = 0;
         private float originalSlamBlastRadius = 0;
-        private float originalImpactDamageCoefficient = 0;
-        private float originalImpactDuration = 0;
+        private float originalSlamDuration = 0;
+        private float originalImpactHitPauseDuration = 0;
+        private int originalChargesToGrant = 0;
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
@@ -221,50 +232,50 @@ namespace SkillsPlusPlus.Modifiers
 
             if (leapType != null)
             {
-                if (Mathf.Abs(originalLeapDamageCoefficient) < 0.01f) 
-                    originalLeapDamageCoefficient = GetStaticFloat(leapType, "damageCoefficient");
-                if (Mathf.Abs(originalLeapBlastRadius) < 0.01f) 
-                    originalLeapBlastRadius = GetStaticFloat(leapType, "blastRadius");
+                if (Mathf.Abs(originalLeapBaseDuration) < 0.01f) 
+                    originalLeapBaseDuration = GetStaticFloat(leapType, "baseDuration");
+                if (Mathf.Abs(originalLeapVerticalSpeed) < 0.01f) 
+                    originalLeapVerticalSpeed = GetStaticFloat(leapType, "baseVerticalSpeed");
 
-                float newLeapDamage = MultScaling(originalLeapDamageCoefficient, 0.20f, level);
-                float newLeapBlast = MultScaling(originalLeapBlastRadius, 0.25f, level);
+                float newLeapDuration = MultScaling(originalLeapBaseDuration, -0.15f, level);
+                float newLeapSpeed = MultScaling(originalLeapVerticalSpeed, 0.20f, level);
                 
-                SetStaticFloat(leapType, "damageCoefficient", newLeapDamage);
-                SetStaticFloat(leapType, "blastRadius", newLeapBlast);
+                SetStaticFloat(leapType, "baseDuration", newLeapDuration);
+                SetStaticFloat(leapType, "baseVerticalSpeed", newLeapSpeed);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Leap Damage: {originalLeapDamageCoefficient} -> {newLeapDamage}, Leap Blast: {originalLeapBlastRadius} -> {newLeapBlast}");
+                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Leap Duration: {originalLeapBaseDuration} -> {newLeapDuration}, Leap Speed: {originalLeapVerticalSpeed} -> {newLeapSpeed}");
             }
 
             if (slamType != null)
             {
-                if (Mathf.Abs(originalSlamDamageCoefficient) < 0.01f) 
-                    originalSlamDamageCoefficient = GetStaticFloat(slamType, "damageCoefficient");
+                if (Mathf.Abs(originalSlamBaseDamageCoefficient) < 0.01f) 
+                    originalSlamBaseDamageCoefficient = GetStaticFloat(slamType, "baseDamageCoefficient");
                 if (Mathf.Abs(originalSlamBlastRadius) < 0.01f) 
-                    originalSlamBlastRadius = GetStaticFloat(slamType, "blastRadius");
+                    originalSlamBlastRadius = GetStaticFloat(slamType, "slamRadius");
+                if (Mathf.Abs(originalSlamDuration) < 0.01f) 
+                    originalSlamDuration = GetStaticFloat(slamType, "duration");
 
-                float newSlamDamage = MultScaling(originalSlamDamageCoefficient, 0.20f, level);
+                float newSlamDamage = MultScaling(originalSlamBaseDamageCoefficient, 0.25f, level);
                 float newSlamBlast = MultScaling(originalSlamBlastRadius, 0.25f, level);
+                float newSlamDuration = MultScaling(originalSlamDuration, -0.10f, level);
                 
-                SetStaticFloat(slamType, "damageCoefficient", newSlamDamage);
-                SetStaticFloat(slamType, "blastRadius", newSlamBlast);
+                SetStaticFloat(slamType, "baseDamageCoefficient", newSlamDamage);
+                SetStaticFloat(slamType, "slamRadius", newSlamBlast);
+                SetStaticFloat(slamType, "duration", newSlamDuration);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Slam Damage: {originalSlamDamageCoefficient} -> {newSlamDamage}, Slam Blast: {originalSlamBlastRadius} -> {newSlamBlast}");
+                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Slam Damage: {originalSlamBaseDamageCoefficient} -> {newSlamDamage}, Slam Blast: {originalSlamBlastRadius} -> {newSlamBlast}, Slam Duration: {originalSlamDuration} -> {newSlamDuration}");
             }
 
             if (impactType != null)
             {
-                if (Mathf.Abs(originalImpactDamageCoefficient) < 0.01f) 
-                    originalImpactDamageCoefficient = GetStaticFloat(impactType, "damageCoefficient");
-                if (Mathf.Abs(originalImpactDuration) < 0.01f) 
-                    originalImpactDuration = GetStaticFloat(impactType, "duration");
+                if (Mathf.Abs(originalImpactHitPauseDuration) < 0.01f) 
+                    originalImpactHitPauseDuration = GetStaticFloat(impactType, "hitPauseDurationSolo");
 
-                float newImpactDamage = MultScaling(originalImpactDamageCoefficient, 0.20f, level);
-                float newImpactDuration = MultScaling(originalImpactDuration, -0.10f, level);
+                float newImpactHitPause = MultScaling(originalImpactHitPauseDuration, -0.15f, level);
                 
-                SetStaticFloat(impactType, "damageCoefficient", newImpactDamage);
-                SetStaticFloat(impactType, "duration", newImpactDuration);
+                SetStaticFloat(impactType, "hitPauseDurationSolo", newImpactHitPause);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Impact Damage: {originalImpactDamageCoefficient} -> {newImpactDamage}, Impact Duration: {originalImpactDuration} -> {newImpactDuration}");
+                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Impact Hit Pause: {originalImpactHitPauseDuration} -> {newImpactHitPause}");
             }
         }
     }
@@ -273,8 +284,9 @@ namespace SkillsPlusPlus.Modifiers
     internal class ExecutionerConsecrationSkillModifier : ReflectedSkillModifier
     {
         private float originalChargeDuration = 0;
-        private float originalDamageCoefficient = 0;
-        private float originalBaseDuration = 0;
+        private float originalHealFraction = 0;
+        private float originalBuffDuration = 0;
+        private int originalBaseMaxStock = 0;
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
@@ -296,18 +308,29 @@ namespace SkillsPlusPlus.Modifiers
 
             if (consecrationType != null)
             {
-                if (Mathf.Abs(originalDamageCoefficient) < 0.01f) 
-                    originalDamageCoefficient = GetStaticFloat(consecrationType, "damageCoefficient");
-                if (Mathf.Abs(originalBaseDuration) < 0.01f) 
-                    originalBaseDuration = GetStaticFloat(consecrationType, "baseDuration");
+                if (Mathf.Abs(originalHealFraction) < 0.01f) 
+                    originalHealFraction = GetStaticFloat(consecrationType, "healFraction");
+                if (Mathf.Abs(originalBuffDuration) < 0.01f) 
+                    originalBuffDuration = GetStaticFloat(consecrationType, "buffDuration");
 
-                float newDamage = MultScaling(originalDamageCoefficient, 0.25f, level);
-                float newBaseDuration = MultScaling(originalBaseDuration, 0.20f, level);
+                float newHealFraction = MultScaling(originalHealFraction, 0.25f, level);
+                float newBuffDuration = MultScaling(originalBuffDuration, 0.10f, level);
                 
-                SetStaticFloat(consecrationType, "damageCoefficient", newDamage);
-                SetStaticFloat(consecrationType, "baseDuration", newBaseDuration);
+                SetStaticFloat(consecrationType, "healFraction", newHealFraction);
+                SetStaticFloat(consecrationType, "buffDuration", newBuffDuration);
                 
-                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Damage: {originalDamageCoefficient} -> {newDamage}, Duration: {originalBaseDuration} -> {newBaseDuration}");
+                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Heal Fraction: {originalHealFraction} -> {newHealFraction}, Buff Duration: {originalBuffDuration} -> {newBuffDuration}");
+            }
+
+            if (skillDef != null)
+            {
+                if (Mathf.Abs(originalBaseMaxStock) < 0.01f) 
+                    originalBaseMaxStock = skillDef.baseMaxStock;
+
+                int newMaxStock = originalBaseMaxStock + (5 * level);
+                skillDef.baseMaxStock = newMaxStock;
+                
+                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Max Stock: {originalBaseMaxStock} -> {newMaxStock}");
             }
         }
     }
