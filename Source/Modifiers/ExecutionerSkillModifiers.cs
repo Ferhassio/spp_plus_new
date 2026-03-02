@@ -29,7 +29,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(firePistolType, "damageCoefficient", newDamage);
                 SetStaticFloat(firePistolType, "baseDuration", newDuration);
                 
-                Logger.Warn($"ExecutionerFirePistolSkillModifier: Level {level} - Damage: {originalDamageCoefficient} -> {newDamage}, Duration: {originalBaseDuration} -> {newDuration}");
+                // Logger.Warn($"ExecutionerFirePistolSkillModifier: Level {level} - Damage: {originalDamageCoefficient} -> {newDamage}, Duration: {originalBaseDuration} -> {newDuration}");
             }
         }
     }
@@ -62,7 +62,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(fireTaserType, "damageCoefficient", newDamage);
                 SetStaticInt(fireTaserType, "baseBouncesRemaining", newBouncesRemaining);
                 
-                Logger.Warn($"ExecutionerFireTaserSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Bounces: {originalBaseBouncesRemaining} -> {newBouncesRemaining}");
+                // Logger.Warn($"ExecutionerFireTaserSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Bounces: {originalBaseBouncesRemaining} -> {newBouncesRemaining}");
             }
         }
     }
@@ -90,7 +90,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(dashType, "baseDuration", newDuration);
                 SetStaticFloat(dashType, "fearDuration", newFearDuration);
                 
-                Logger.Warn($"ExecutionerDashSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Fear Duration: {originalFearDuration} -> {newFearDuration}");
+                // Logger.Warn($"ExecutionerDashSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Fear Duration: {originalFearDuration} -> {newFearDuration}");
             }
         }
     }
@@ -117,7 +117,7 @@ namespace SkillsPlusPlus.Modifiers
                 float newChargeDuration = MultScaling(originalChargeDuration, -0.20f, level);
                 SetStaticFloat(chargeType, "baseDuration", newChargeDuration);
                 
-                Logger.Warn($"ExecutionerBloodlettingSkillModifier: Level {level} - Charge Duration: {originalChargeDuration} -> {newChargeDuration}");
+                // Logger.Warn($"ExecutionerBloodlettingSkillModifier: Level {level} - Charge Duration: {originalChargeDuration} -> {newChargeDuration}");
             }
 
             if (bloodlettingType != null)
@@ -133,7 +133,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(bloodlettingType, "damageCoefficient", newDamage);
                 SetStaticFloat(bloodlettingType, "healFraction", newHealFraction);
                 
-                Logger.Warn($"ExecutionerBloodlettingSkillModifier: Level {level} - Damage: {originalDamageCoefficient} -> {newDamage}, Heal Fraction: {originalHealFraction} -> {newHealFraction}");
+                // Logger.Warn($"ExecutionerBloodlettingSkillModifier: Level {level} - Damage: {originalDamageCoefficient} -> {newDamage}, Heal Fraction: {originalHealFraction} -> {newHealFraction}");
             }
         }
     }
@@ -162,7 +162,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(chargeGunType, "baseDuration", newDuration);
                 SetStaticFloat(chargeGunType, "damageCoefficient", newDamage);
                 
-                Logger.Warn($"ExecutionerChargeIonsSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}");
+                // Logger.Warn($"ExecutionerChargeIonsSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}");
             }
             
             if (skillDef != null)
@@ -173,7 +173,7 @@ namespace SkillsPlusPlus.Modifiers
                 int newBaseMaxStock = originalBaseMaxStock + (level * 5);
                 skillDef.baseMaxStock = newBaseMaxStock;
                 
-                Logger.Warn($"ExecutionerChargeIonsSkillModifier: Level {level} - Base Max Stock: {originalBaseMaxStock} -> {newBaseMaxStock}");
+                // Logger.Warn($"ExecutionerChargeIonsSkillModifier: Level {level} - Base Max Stock: {originalBaseMaxStock} -> {newBaseMaxStock}");
             }
         }
     }
@@ -206,7 +206,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(fireChargeGunType, "damageCoefficient", newDamage);
                 SetStaticFloat(fireChargeGunType, "selfKnockbackForce", newKnockbackForce);
                 
-                Logger.Warn($"ExecutionerFireIonGunSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Knockback Force: {originalSelfKnockbackForce} -> {newKnockbackForce}");
+                // Logger.Warn($"ExecutionerFireIonGunSkillModifier: Level {level} - Duration: {originalBaseDuration} -> {newDuration}, Damage: {originalDamageCoefficient} -> {newDamage}, Knockback Force: {originalSelfKnockbackForce} -> {newKnockbackForce}");
             }
         }
     }
@@ -243,7 +243,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(leapType, "baseDuration", newLeapDuration);
                 SetStaticFloat(leapType, "baseVerticalSpeed", newLeapSpeed);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Leap Duration: {originalLeapBaseDuration} -> {newLeapDuration}, Leap Speed: {originalLeapVerticalSpeed} -> {newLeapSpeed}");
+                // Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Leap Duration: {originalLeapBaseDuration} -> {newLeapDuration}, Leap Speed: {originalLeapVerticalSpeed} -> {newLeapSpeed}");
             }
 
             if (slamType != null)
@@ -263,7 +263,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(slamType, "slamRadius", newSlamBlast);
                 SetStaticFloat(slamType, "duration", newSlamDuration);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Slam Damage: {originalSlamBaseDamageCoefficient} -> {newSlamDamage}, Slam Blast: {originalSlamBlastRadius} -> {newSlamBlast}, Slam Duration: {originalSlamDuration} -> {newSlamDuration}");
+                // Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Slam Damage: {originalSlamBaseDamageCoefficient} -> {newSlamDamage}, Slam Blast: {originalSlamBlastRadius} -> {newSlamBlast}, Slam Duration: {originalSlamDuration} -> {newSlamDuration}");
             }
 
             if (impactType != null)
@@ -275,7 +275,7 @@ namespace SkillsPlusPlus.Modifiers
                 
                 SetStaticFloat(impactType, "hitPauseDurationSolo", newImpactHitPause);
                 
-                Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Impact Hit Pause: {originalImpactHitPauseDuration} -> {newImpactHitPause}");
+                // Logger.Warn($"ExecutionerExecuteSkillModifier: Level {level} - Impact Hit Pause: {originalImpactHitPauseDuration} -> {newImpactHitPause}");
             }
         }
     }
@@ -303,7 +303,7 @@ namespace SkillsPlusPlus.Modifiers
                 float newChargeDuration = MultScaling(originalChargeDuration, -0.15f, level);
                 SetStaticFloat(chargeType, "baseDuration", newChargeDuration);
                 
-                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Charge Duration: {originalChargeDuration} -> {newChargeDuration}");
+                // Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Charge Duration: {originalChargeDuration} -> {newChargeDuration}");
             }
 
             if (consecrationType != null)
@@ -319,7 +319,7 @@ namespace SkillsPlusPlus.Modifiers
                 SetStaticFloat(consecrationType, "healFraction", newHealFraction);
                 SetStaticFloat(consecrationType, "buffDuration", newBuffDuration);
                 
-                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Heal Fraction: {originalHealFraction} -> {newHealFraction}, Buff Duration: {originalBuffDuration} -> {newBuffDuration}");
+                // Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Heal Fraction: {originalHealFraction} -> {newHealFraction}, Buff Duration: {originalBuffDuration} -> {newBuffDuration}");
             }
 
             if (skillDef != null)
@@ -330,7 +330,7 @@ namespace SkillsPlusPlus.Modifiers
                 int newMaxStock = originalBaseMaxStock + (5 * level);
                 skillDef.baseMaxStock = newMaxStock;
                 
-                Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Max Stock: {originalBaseMaxStock} -> {newMaxStock}");
+                // Logger.Warn($"ExecutionerConsecrationSkillModifier: Level {level} - Max Stock: {originalBaseMaxStock} -> {newMaxStock}");
             }
         }
     }
