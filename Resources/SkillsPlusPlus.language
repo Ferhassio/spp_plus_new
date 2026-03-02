@@ -186,8 +186,8 @@
 		"SDEXE2CHARGEIONS_UPGRADE_DESCRIPTION": "<style=cIsUtility>-15%</style> charge and shot duration, <style=cIsDamage>+20%</style> damage, <style=cIsUtility>+5</style> max stock, and <style=cIsUtility>-10%</style> knockback force",
 		
 		"FIRETRILEAF_UPGRADE_DESCRIPTION": "<style=cIsUtility>+1</style> shot and <style=cIsDamage>+20%</style> damage per level",
-		"SPITBOMB_UPGRADE_DESCRIPTION": "<style=cIsDamage>+20%</style> damage and <style=cIsUtility>+15%</style> duration per level",
+		"SPITBOMB_UPGRADE_DESCRIPTION": "<style=cIsDamage>+20%</style> damage and <style=cIsUtility>+1</style> max stock per level",
 		"GRABDASH_UPGRADE_DESCRIPTION": "<style=cIsUtility>+15%</style> dash distance, <style=cIsUtility>+20%</style> maneuverability, <style=cIsDamage>+25%</style> throw damage, and <style=cIsDamage>+50%</style> ally attack speed buff per level",
-		"BEFRIEND_UPGRADE_DESCRIPTION": "<style=cIsUtility>-10%</style> cast duration, <style=cIsUtility>+10%</style> health threshold per level, <style=cIsUtility>+20</style> armor per level when you have a friend, and <style=cIsUtility>+5%</style> movement speed per level when you have a friend",
+		"BEFRIEND_UPGRADE_DESCRIPTION": "<style=cIsUtility>-10%</style> cast duration, <style=cIsUtility>+10%</style> health threshold per level, <style=cIsUtility>+40</style> armor per level when you have a friend",
 	}
 }

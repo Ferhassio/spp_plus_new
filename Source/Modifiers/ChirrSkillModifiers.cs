@@ -1,6 +1,9 @@
 using System;
+using System.Reflection;
+using EntityStates;
 using RoR2;
 using RoR2.Skills;
+using RoR2.Projectile;
 using SkillsPlusPlus.Modifiers;
 using UnityEngine;
 using R2API;
@@ -36,25 +39,29 @@ namespace SkillsPlusPlus.Modifiers
     [SkillLevelModifier("SpitBomb", "EntityStates.Chirr.SpitBomb")]
     internal class ChirrSpitBombSkillModifier : ReflectedSkillModifier
     {
-        private float originalDamageCoefficient = 0;
-        private float originalBaseDuration = 0;
+       private float originalDamageCoefficient = 0;
+        private int originalBaseMaxStock = 0;
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
-            Type spitBombType = EntityStateTypes.Length > 0 ? EntityStateTypes[0] : null;
+            Type spitBombType = System.Type.GetType("EntityStates.Chirr.SpitBomb, SS2");
             
             if (spitBombType != null)
             {
                 if (Mathf.Abs(originalDamageCoefficient) < 0.01f)
                     originalDamageCoefficient = GetStaticFloat(spitBombType, "damageCoefficient");
-                if (Mathf.Abs(originalBaseDuration) < 0.01f)
-                    originalBaseDuration = GetStaticFloat(spitBombType, "baseDuration");
 
                 float newDamage = MultScaling(originalDamageCoefficient, 0.20f, level);
-                float newDuration = MultScaling(originalBaseDuration, 0.15f, level);
-                
                 SetStaticFloat(spitBombType, "damageCoefficient", newDamage);
-                SetStaticFloat(spitBombType, "baseDuration", newDuration);
+            }
+
+            if (skillDef != null)
+            {
+                if (originalBaseMaxStock == 0)
+                    originalBaseMaxStock = skillDef.baseMaxStock;
+
+                int newBaseMaxStock = (int)AdditiveScaling(1, 0.5f, level);
+                skillDef.baseMaxStock = newBaseMaxStock;
             }
         }
     }
@@ -120,17 +127,23 @@ namespace SkillsPlusPlus.Modifiers
     {
         private float originalBaseDuration = 0;
         private float originalFriendHealthFraction = 0;
-        private CharacterBody surv;
         private int skilllevel;
+        private CharacterBody surv;
+
+        public override void SetupSkill()
+        {
+            RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPIOnGetStatCoefficients;
+            base.SetupSkill();
+        }
 
         public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
         {
             base.OnSkillLeveledUp(level, characterBody, skillDef);
-            surv = characterBody;
             skilllevel = level;
+            surv = characterBody;
 
             Type befriendType = EntityStateTypes.Length > 0 ? EntityStateTypes[0] : null;
-            Type friendTrackerType = System.Type.GetType("SS2.Components.ChirrFriendTracker, SS2");
+            Type friendTrackerType = FindType("SS2.Components.ChirrFriendTracker");
             
             if (befriendType != null)
             {
@@ -151,19 +164,53 @@ namespace SkillsPlusPlus.Modifiers
             }
         }
 
-        public override void SetupSkill()
+        private Type FindType(string typeName)
         {
-            base.SetupSkill();
-            RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPIOnGetStatCoefficients;
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                Type type = assembly.GetType(typeName);
+                if (type != null)
+                {
+                    return type;
+                }
+            }
+            return null;
         }
 
         private void RecalculateStatsAPIOnGetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            Type friendControllerType = System.Type.GetType("SS2.Components.ChirrFriendController, SS2");
-            if (friendControllerType != null && sender.GetComponent(friendControllerType) != null && sender == surv)
+            if (sender == null) return;
+            if (surv == null) return;
+            
+            if (sender.bodyIndex != surv.bodyIndex)
             {
-                args.armorAdd += AdditiveScaling(0, 20, skilllevel);
-                args.moveSpeedMultAdd += MultScaling(0, 0.05f, skilllevel);
+                return;
+            }
+
+            if (sender.masterObject != null)
+            {
+                var master = sender.masterObject.GetComponent<CharacterMaster>();
+                if (master != null)
+                {
+                    Type friendControllerType = FindType("SS2.Components.ChirrFriendController");
+                    if (friendControllerType != null)
+                    {
+                        var friendController = master.GetComponent(friendControllerType);
+                        if (friendController != null)
+                        {
+                            var hasFriendProperty = friendControllerType.GetProperty("hasFriend");
+                            if (hasFriendProperty != null)
+                            {
+                                bool hasFriend = (bool)hasFriendProperty.GetValue(friendController);
+                                if (hasFriend)
+                                {
+                                    float armorBonus = AdditiveScaling(0, 40, skilllevel);
+                                    args.armorAdd += armorBonus;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
