@@ -177,12 +177,13 @@
 		"COMMANDSHIELDFORMATION_UPGRADE_DESCRIPTION": "Not Yet Implemented...",
 		"DRONEBALLSHOOTABLE_UPGRADE_DESCRIPTION": "Not Yet Implemented...",
 
-		"EXECUTIONER2BODYFIREPISTOL_UPGRADE_DESCRIPTION": "<style=cIsDamage>+15%</style> damage and <style=cIsUtility>+20%</style> attack speed",
-		"EXECUTIONER2BODYDASH_UPGRADE_DESCRIPTION": "<style=cIsUtility>+15%</style> speed and <style=cIsUtility>+0.5s</style> fear duration",
-		"EXECUTIONER2BODYEXECUTE_UPGRADE_DESCRIPTION": "<style=cIsDamage>+20%</style> damage, <style=cIsUtility>+25%</style> blast radius, and <style=cIsUtility>+1</style> target per level",
-		"EXECUTIONER2BODYBLOODLETTING_UPGRADE_DESCRIPTION": "<style=cIsUtility>-20%</style> charge duration, <style=cIsDamage>+20%</style> damage, and <style=cIsHealing>+5%</style> heal fraction",
-		"EXECUTIONER2BODYEXECUTION_UPGRADE_DESCRIPTION": "<style=cIsUtility>-15%</style> charge duration, <style=cIsDamage>+25%</style> damage, and <style=cIsUtility>+1</style> target per level",
-		"EXECUTIONER2BODYPUNISHMENT_UPGRADE_DESCRIPTION": "<style=cIsUtility>+20%</style> attack speed and <style=cIsDamage>+30%</style> damage",
-		"EXECUTIONER2BODYOVERDRIVE_UPGRADE_DESCRIPTION": "<style=cIsUtility>+20%</style> duration and <style=cIsUtility>+10%</style> speed multiplier",
+		"SDEXE2PISTOL_UPGRADE_DESCRIPTION": "<style=cIsDamage>+15%</style> damage and <style=cIsUtility>+20%</style> attack speed",
+		"SDEXE2DASH_UPGRADE_DESCRIPTION": "<style=cIsUtility>+15%</style> speed and <style=cIsUtility>+0.5s</style> fear duration",
+		"SDEXE2SLAM_UPGRADE_DESCRIPTION": "<style=cIsDamage>+20%</style> damage, <style=cIsUtility>+25%</style> blast radius, and <style=cIsUtility>+1</style> target per level",
+		"SDEXE2BLOODLETTING_UPGRADE_DESCRIPTION": "<style=cIsUtility>-20%</style> charge duration, <style=cIsDamage>+20%</style> damage, and <style=cIsHealing>+5%</style> heal fraction",
+		"SDEXE2CHARGECONSECRATION_UPGRADE_DESCRIPTION": "<style=cIsUtility>-15%</style> charge duration, <style=cIsDamage>+25%</style> damage, and <style=cIsUtility>+1</style> target per level",
+		"SDEXE2FIREFIRELASER_UPGRADE_DESCRIPTION": "<style=cIsUtility>+20%</style> attack speed and <style=cIsDamage>+30%</style> damage",
+		"SDEXE2FIREFIRECHARGEBURST_UPGRADE_DESCRIPTION": "<style=cIsUtility>+20%</style> duration and <style=cIsUtility>+10%</style> speed multiplier",
+		"SDEXE2CHARGEIONS_UPGRADE_DESCRIPTION": "<style=cIsUtility>-15%</style> charge duration, <style=cIsDamage>+20%</style> damage, and <style=cIsUtility>+5</style> max stock",
 	}
 }
