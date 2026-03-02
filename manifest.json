@@ -1,8 +1,8 @@
 {
-	"name": "SkillsPlusPlus",
-	"version_number": "0.6.2",
+	"name": "NewSkillsPlusPlus",
+	"version_number": "0.6.5",
 	"website_url": "https://github.com/gamrtiem/ror2skillsplusplus",
-	"description": "Add progression to your runs with skill upgrades (+SOTS compatible!)",
+	"description": "Add progression to your runs with skill upgrades (Alloyed Collective compatible and Seekers of the Storm compatible!)",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2117",
 		"tristanmcpherson-R2API-5.0.5",

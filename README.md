@@ -1,37 +1,35 @@
-# Risk of Rain 2 - Skills++ Mod
+# Risk of Rain 2 - NewSkills++ Mod
 
-[![Discord](https://img.shields.io/discord/745162241359478894?color=7289DA&label=modding%20discord&logo=discord&logoColor=white)](https://discord.gg/gGtcnJDnDw) [![source code](https://img.shields.io/static/v1?label=github&logo=github&message=source%20code&color=FFFFFF)](https://github.com/gamrtiem/ror2skillsplusplus/)
+[![Discord](https://img.shields.io/discord/745162241359478894?color=7289DA&label=modding%20discord&logo=discord&logoColor=white)](https://discord.gg/gGtcnJDnDw)
 
-## What's new in 0.6.3
-- Updated for SOTS phase 3!!
+This fork of [ModSkills++](https://github.com/gamrtiem/ror2skillsplusplus) by [gamrtiem](https://github.com/gamrtiem) 
 
-## What's new in 0.6.2
-- Added Void fiend upgrades!
-- (Hopefully) fixed multiplayer not adding levels for clients
+[Original author's changelog history](https://github.com/gamrtiem/ror2skillsplusplus/blob/main/CHANGELOG.md)
 
-## What's new in 0.6.1
-- Re-added configs with support for Risk of Options (sorry controller bros .., looking into how extra skill slots adds controller support!)
-- Fixed a bug where skill upgrades wouldn't stay until re-upgraded on the next stage
-- Fixed Arti's Snapfreeze upgrade not doing anything
+## What's new in this fork:
 
-## What's new in 0.6.0
-- Updated for Seekers of the Storm! (Expect some bugs (again) (please report them on the github !!))
-- Fixed incorrect scaling for MUL-T causing his dash to deal 4x damage
-- Added new upgrade for MUL-T's Power Mode
-- SOTS survivor support is yet to be added
+v0.6.5:
+- Added compatibility with Alloyed Collective dlc.
+- Added compatibility for Mulplayer.
+- Added compability (not balance) for Starstorm2 character: Executioner
 
-## What's new in 0.5.0
-- Updated the way the mod finds the names of skills to hopefully alleviate future problems with implementing new skills. (For modders: Skill Names now finds the Object.Name of the SkillDef rather than skilldef.skillname. If your mod was using different names for those two, please update your Skills++ integration to use the correct name.) 
+## What's planned for future versions:
 
-- Fixed an error that prevented Engi's turrets from getting their buffs.
-- Fixed some tooltip issues regarding Huntress' second utility skill and Void Fiend picking up Acrid's tooltips by mistake.
-- Added Not Yet Implemented messages to the unsupported vanilla skills to reduce confusion.
+- Add all Starstrom2 character to compatibility list.
+- Add all most popular modded characters.
+- Add balance for modded characters.
+- Add UI tool to manage skills and add custom survivor to compatibility list.
 
-[Full changelog history](https://github.com/gamrtiem/ror2skillsplusplus/blob/main/CHANGELOG.md)
 
 ## Installation
 
-Using a mod manager like [r2modman](https://thunderstore.io/package/ebkr/r2modman/) or [gale](https://thunderstore.io/package/Kesomannen/GaleModManager/) is recommended to install mods in general, but if you're running a manual install simply extract the mod's files to your `BepInEx/plugins` folder.
+In current version only manual installation is supported.
+For Thunderstore users - WIP, sorry.
+
+1. Download builded mod NewSkillsPlusPlus.zip
+2. Extract all files on ror2modman folder. Example: `C:\Users\Ferhassio\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\test\BepInEx\plugins\NewSkillsPlusPlus`
+3. Run "Start Modded" in ror2modman.
+
 
 ## Usage
 
@@ -54,14 +52,6 @@ Upgrades do not carry over between runs so you will be starting from scratch eve
 1. Clicking on any of the 'Buy' buttons will spend a single point and the skill will upgrade.
 ![](https://raw.githubusercontent.com/gamrtiem/ror2skillsplusplus/refs/heads/main/Images/skillpoint_spent.png)
 
-## Modded characters
-
-Go and check out all of these characters and give them some love!
-
-If you have added Skills++ to your own modded character let me know and I will add it here.
-
-[![TTGL by Mico27](https://gcdn.thunderstore.io/live/repository/icons/Mico27-TTGL_Mod-0.3.4.png.128x128_q95.jpg)](https://thunderstore.io/package/Mico27/TTGL_Mod/)
-
 ### Disabling survivors
 
 Console commands have been added to disable and reenable Skills++ for selected survivors.
@@ -81,7 +71,7 @@ The enable command is there to re-enable a survivor if the conflict no longer ex
 
 ## Feedback and bug reports
 
-The best way to give feedback or raise bugs is through [opening a github issue](https://github.com/gamrtiem/ror2skillsplusplus/issues/new?template=Blank+issue) (please provide a log !!). 
+The best way to give feedback or raise bugs is through opening a github issue (please provide a log !!). 
 I welcome everyone who uses Skills++ to drop by and share your thoughts.
 
 ## FAQ
@@ -118,6 +108,9 @@ Upgrade descriptions are also shown ingame when hovering over a skill's icon.
 **Jump to character**
 
 [![Commando](https://img.shields.io/static/v1?label=&message=Commando&color=ED9612)](#Commando) [![Huntress](https://img.shields.io/static/v1?label=&message=Huntress&color=D53C3C)](#Huntress) [![Bandit](https://img.shields.io/static/v1?label=&message=Bandit&color=C374C5)](#Bandit) [![MUL-T](https://img.shields.io/static/v1?label=&message=MUL-T&color=D3C450)](#Mul-t) [![Engineer](https://img.shields.io/static/v1?label=&message=Engineer&color=5FE286)](#Engineer) [![Artificer](https://img.shields.io/static/v1?label=&message=Artificer&color=F7C1FD)](#Artificer) [![Mercenary](https://img.shields.io/static/v1?label=&message=Mercenary&color=6CD1EA)](#Mercenary) [![REX](https://img.shields.io/static/v1?label=&message=REX&color=869E54)](#Rex) [![Loader](https://img.shields.io/static/v1?label=&message=Loader&color=6770DE)](#Loader) [![Acrid](https://img.shields.io/static/v1?label=&message=Acrid&color=C9F24D)](#Acrid) [![Captain](https://img.shields.io/static/v1?label=&message=Captain&color=BEBA92)](#Captain) [![Railgunner](https://img.shields.io/static/v1?label=&message=Railgunner&color=ed164d)](#Railgunner) [![Lunar Items](https://img.shields.io/static/v1?label=&message=Lunar%20Items&color=307FFF)](#Lunar-items)
+
+### Executioner
+Description only in game. Added here soon, after balance.
 
 ### Commando
 
