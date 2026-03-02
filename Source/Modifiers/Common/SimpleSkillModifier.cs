@@ -17,7 +17,7 @@ namespace SkillsPlusPlus.Modifiers
         {
             if (skillState is SkillState)
             {
-                Logger.Debug("OnSkillEnter({0}, {1})", skillState, level);
+                // Logger.Debug("OnSkillEnter({0}, {1})", skillState, level);
                 this.OnSkillEnter(skillState as SkillState, level);
             }
             else
@@ -31,7 +31,7 @@ namespace SkillsPlusPlus.Modifiers
         {
             if (skillState is SkillState)
             {
-                Logger.Debug("OnSkillExit({0}, {1})", skillState, level);
+                // Logger.Debug("OnSkillExit({0}, {1})", skillState, level);
                 this.OnSkillExit(skillState as SkillState, level);
             }
             else
